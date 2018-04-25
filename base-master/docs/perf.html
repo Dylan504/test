@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+  <head>
+    <title></title>
+    <meta charset="UTF-8" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+  </head>
+  <body>
+    <script src="../../seajs-master/dist/sea-debug.js"></script>
+    <script type="text/javascript">
+      seajs.config({
+        // alias: {
+        //   'class': 'arale/class/1.0.0/class',
+        //   'events': 'arale/events/1.1.0/events'
+        // }
+      })
+      seajs.use('../src/base', function(Base) {
+        var One = Base.extend({
+          attrs: {
+            a: 'aa',
+            b: null,
+            c: new Date(),
+            d: document.body,
+            e: /a/g
+          },
+
+          propsInAttrs: ['c', 'd'],
+
+          getC:function(){
+            return this.get('c');
+          },
+
+          _onChangeC:function(){
+            alert('c is changing....')
+          }
+        });
+
+        var Two = One.extend({
+          attrs: {
+            f: true,
+            g: [1, 2, 3],
+            h: {
+              j: true,
+              k: [4, 5, 6]
+            }
+          }
+        });
+
+        var obj = new One();
+        var obj1 = new One();
+
+        console.log('obj.c='+obj.getC());
+        console.log('obj.c='+obj.c);
+        obj.set('c',5);
+        console.log('after....');
+        console.log('obj.c='+obj.getC());
+        console.log('obj.c='+obj.c);
+        // for (var i = 0; i < 1000; i++) {
+        //   var o = new Two({
+        //     a: 'a',
+        //     b: new Base(),
+        //     f: false,
+        //     h: {
+        //       k: [4, 5]
+        //     }
+        //   });
+        //   o.set('h', {
+        //     l: {
+        //       m: 0,
+        //       n: 1
+        //     },
+        //     j: false
+        //   });
+        // }
+        console.log('done')
+      })
+    </script>
+  </body>
+</html>
